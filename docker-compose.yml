@@ -1,23 +1,28 @@
 version: '2'
 
 services:
-  mariadb:
+  database:
     image: docker.io/bitnami/mariadb:10.6
+    ports:
+      - '3406:3306'
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=developer
       - MARIADB_DATABASE=bht_122983_local
-  myapp:
+  app:
     image: docker.io/bitnami/laravel:10
     ports:
-      - '8000:8000'
+      - '8100-8110:8100-8110'
     environment:
-      - DB_HOST=mariadb
+      - LARAVEL_PORT_NUMBER=8100
+      - DB_HOST=database
       - DB_PORT=3306
       - DB_USERNAME=developer
       - DB_DATABASE=bht_122983_local
     volumes:
       - './app:/app'
+    command:
+      - npm run dev
     depends_on:
-      - mariadb
+      - database
