@@ -88,11 +88,7 @@ export default function Login({ status, canResetPassword }) {
                         </Link>
                     )}
 
-                    <SecondaryButton
-                        href={route('register')}
-                        className="ml-4"
-                        disabled={processing}
-                    >
+                    <SecondaryButton href={route('register')} className="ml-4">
                         Sign Up
                     </SecondaryButton>
                     <PrimaryButton className="ml-4" disabled={processing}>

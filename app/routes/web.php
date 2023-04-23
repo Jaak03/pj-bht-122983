@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GridController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/grid', function () {
-    return Inertia::render('Grid');
-})->middleware(['auth', 'verified'])->name('grid');
+Route::group(['prefix' => 'grid'], function() {
+    Route::get('/', [GridController::class, 'index'])->name('grid.home');
+})->middleware(['auth','verified']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

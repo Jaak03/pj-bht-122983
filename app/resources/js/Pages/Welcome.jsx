@@ -23,7 +23,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                 <div className="relative p-6 min-w-fit min-h-fit">
                     <Login canResetPassword={true} />
-                    <p>{auth.user || "None"}</p>
                 </div>
             </div>
 
