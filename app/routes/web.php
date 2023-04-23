@@ -3,6 +3,7 @@
 use App\Http\Controllers\GridController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,6 +19,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    // If there is already a logged-in user.
+    if (Auth::user()) {
+        return redirect()->route('grid.home');
+    }
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
